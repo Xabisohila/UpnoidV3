@@ -8,6 +8,8 @@ namespace UpnoidV3.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+       // public string Name { get; set; } // this is the property where we are storing the dropdwonlist.
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

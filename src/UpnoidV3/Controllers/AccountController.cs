@@ -22,6 +22,7 @@ namespace UpnoidV3.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+       // private UpnoidContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -85,6 +86,12 @@ namespace UpnoidV3.Controllers
             return View(model);
         }
 
+        //ACCESS DENIED: 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         //
         // GET: /Account/Register
         [HttpGet]
@@ -125,7 +132,37 @@ namespace UpnoidV3.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        /*
+        //
+        //New Methods
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult RegisterRole()
+        {
+            ViewBag.Name = new SelectList(_context.Roles.ToList(), "Name", "Name");
+            ViewBag.UserName = new SelectList(_context.Users.ToList(), "UserName", "UserName");
+            return View();
+        }
+        */
+        //
+        //POST: /Account/Register
+        /*
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterRole(RegisterViewModel model, ApplicationUser user)
+        {
+            var userId = _context.Users.Where(i => i.UserName == user.UserName).Select(s => s.Id);
+            string updateId = "";
+            foreach (var i in userId)
+            {
+                updateId = i.ToString();
+            }
+            //Assign Role to user here
+            await this._userManager.AddToRoleAsync(updateId, model.Name);
+            return RedirectToAction("Index", "Home");
+        }
+        */
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -134,7 +171,7 @@ namespace UpnoidV3.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(AccountController.Login), "Account");
         }
 
         //

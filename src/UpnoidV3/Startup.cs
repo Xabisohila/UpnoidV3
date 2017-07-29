@@ -12,6 +12,9 @@ using Microsoft.Extensions.Logging;
 using UpnoidV3.Data;
 using UpnoidV3.Models;
 using UpnoidV3.Services;
+using Microsoft.AspNetCore.Mvc;
+using UpnoidV3.Configuration;
+using Microsoft.AspNetCore.Identity;
 
 namespace UpnoidV3
 {
@@ -45,11 +48,15 @@ namespace UpnoidV3
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<UpnoidContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                options=>
+                {
+                    options.Cookies.ApplicationCookie.AccessDeniedPath = "/Account/AccessDenied";
+                })
+                .AddEntityFrameworkStores<UpnoidContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
@@ -84,7 +91,20 @@ namespace UpnoidV3
 
             app.UseIdentity();
 
+            new UserRoleSeed(app.ApplicationServices.GetService<RoleManager<IdentityRole>>()).Seed();
+
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            });
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Authentication:Google:ClientId"],
+                ClientSecret = Configuration["Authentication:Google:ClientSecret"]
+            });
 
             app.UseMvc(routes =>
             {

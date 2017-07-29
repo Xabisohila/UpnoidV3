@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UpnoidV3.Controllers
 {
+   // [RequireHttps] // This will simply redirect all HTTP GET to HTTPS GET and reject all HTTP POSTs
     public class HomeController : Controller
     {
         public IActionResult Index()
