@@ -24,7 +24,7 @@ namespace UpnoidV3.ViewModels
             [Required]
             public DateTime? ReleaseDate { get; set; }
 
-            [DataType(DataType.Time)]
+            [DataType(DataType.Date)]
             [Display(Name = "Date Added")]
             public DateTime DateAdded { get; set; }
 
@@ -37,6 +37,8 @@ namespace UpnoidV3.ViewModels
             [Range(1, 20)]
             [Required]
             public byte? NumberInStock { get; set; }
+
+            public List<Genre> GenreList { get; set;}
 
 
 /*

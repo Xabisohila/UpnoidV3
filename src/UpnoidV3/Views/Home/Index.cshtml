@@ -5,17 +5,49 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<br />
-    <div class="jumbotron text-center center-block">
-
-        <h2><b>Welcome to Upnoid</b></h2>
-
-    </div>
+<p class="text-center center"><b>Movies coming soon in @DateTime.Now.Year..</b></p>
+<div class="home">
     <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <a href="@Url.Action("Index", "Movies")" class="thumbnail">
+                So What. Coming soon!!!
+                <img src="~/images/what now.jpg" alt="" />
+            </a>
+        </div>
 
-        <div class="myPicture text-center center-block">
-            <a>
-                <img class="activator" src="~/images/Website underconstruction.jpg" style="width:50%; height:auto" />
+        <div class="col-xs-6 col-md-4">
+            <a href="@Url.Action("Index", "Movies")" class="thumbnail">
+                Fate and Furius 8. Coming soon!!!
+                <img src="~/images/fast 8.jpg" alt="" />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <a href="@Url.Action("Index", "Movies")" class="thumbnail">
+                So What. Coming soon!!!
+                <img src="~/images/what now.jpg" alt="" />
+            </a>
+        </div>
+
+        <div class="col-xs-6 col-md-4">
+            <a href="@Url.Action("Index", "Movies")" class="thumbnail">
+                Boyka Undisputed. Coming soon!!!
+                <img src="~/images/boyka.jpg" alt="" />
+            </a>
+        </div>
+
+        <div class="col-xs-6 col-md-4">
+            <a href="@Url.Action("Index", "Movies")" class="thumbnail">
+                Justice League. Coming soon!!!
+                <img src="~/images/justice league.png" alt="" />
+            </a>
+        </div>
+
+        <div class="col-xs-6 col-md-4">
+            <a href="@Url.Action("Index", "Movies")" class="thumbnail">
+                Boyka Undisputed. Coming soon!!!
+                <img src="~/images/boyka.jpg" alt="" />
             </a>
         </div>
     </div>
+</div>
+

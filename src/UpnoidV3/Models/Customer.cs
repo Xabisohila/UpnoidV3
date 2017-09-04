@@ -29,7 +29,7 @@ namespace UpnoidV3.Models
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
-        [Min18YearsIfAMember]
+        //[Min18YearsIfAMember]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]  
         public DateTime? Birthdate { get; set; }
 

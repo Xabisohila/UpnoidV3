@@ -3,56 +3,67 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<div class="panel panel-success">
+    <div class="jumbotron panel-heading text-center">
+        DELETE MOVIE
+    </div>
+    <div class="col-md-offset-4">
+        <h5>Are you sure you want to delete the movie <b>@Model.Name?</b></h5>
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(m => m.MovieID)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.MovieID)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateAdded)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DateAdded)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Genres)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Genres)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumberInStock)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NumberInStock)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ReleaseDate)
+                </dd>
+            </dl>
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Movie</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateAdded)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Genres)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Genres)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberInStock)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NumberInStock)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-primary" /> |
-            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            <form asp-action="Delete" class="col-md-offset-1">
+                <div class="form-actions no-color">
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            </form>  
         </div>
-    </form>
+    </div>
+    <p>
+        Upnoid™
+    </p>
 </div>

@@ -8,12 +8,15 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/stylesheet.css" />
+        <link rel="stylesheet" href="~/font-awesome/css/font-awesome.min.css" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/font-awesome-4.7.0/css/font-awesome.min.css" />
     </environment>
     @RenderSection("AddToHead", required: false)
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
@@ -28,29 +31,72 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Upnoid</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Upnoid™</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Rentals" asp-action="New">New Rental</a></li>
-                    <li><a asp-area="" asp-controller="Customers" asp-action="Index">Customers</a></li>
-                    <li><a asp-area="" asp-controller="Movies" asp-action="Index">Movies</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
-            </div>
+                    <ul class="nav navbar-nav">
+                      @*  <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> *@
+                        <li style="color:orangered;"><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        <li><a asp-area="" asp-controller="Rentals" asp-action="New">New Rental</a></li>
+                        <li><a asp-area="" asp-controller="Customers" asp-action="Index">Customers</a></li>
+                        <li><a asp-area="" asp-controller="Movies" asp-action="Index">Movies</a></li>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - Upnoid - uXabiso Hila</p>
-        </footer>
+    <div class="footer">
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy;2017 - Upnoid™ - uXabiso Hila </p>
+                    <a
+                        href="http://facebook.com">
+                        <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>
+                    </a>
+                &nbsp;
+               
+                    <a href="http://twitter.com">
+                        <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+                    </a>
+                &nbsp;
+                    <a href="http://youtube.com">
+                        <i class="fa fa-youtube fa-lg" aria-hidden="true"></i>
+                    </a>
+                &nbsp;
+                    <a href="http://linkedin.com">
+                        <i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
+                    </a>
+                &nbsp;
+                <a href="http://google.com">
+                    <i class="fa fa-google fa-lg" aria-hidden="true"></i>
+                </a>
+                &nbsp;
+                <a href="http://github.com/Xabisohila"> Github
+                    <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+                </a>
+                &nbsp;
+                <a href="http://quora.com">
+                    <i class="fa fa-quora fa-lg" aria-hidden="true"></i>
+                </a>
+                &nbsp;
+                <a href="http://gmail.com">
+                    <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>
+                </a>
+                &nbsp;
+                <a href="http://info.com">
+                    <i class="fa fa-info fa-lg" aria-hidden="true"></i>
+                </a>
+                &nbsp;
+                <div class="pull-right">
+                    <a class="pull-right"><h5>All Rights Reserved™</h5></a>
+                    </div>
+              
+            </footer>
+        </div>
     </div>
-
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

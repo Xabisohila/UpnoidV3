@@ -1,70 +1,90 @@
-@model UpnoidV3.Models.Movie
+@model UpnoidV3.ViewModels.MovieViewModel
+
 
 @{
     ViewData["Title"] = "Create";
 }
+<link rel="stylesheet" href="~/font-awesome-4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="~/css/StyleSheet.css" />
+<div class="panel panel-success">
+    <div class="jumbotron panel-heading text-center">CREATE MOVIE</div>
+    <br />
+    <br />
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success">@TempData["message"]</div>
 
-<h2>Create</h2>
+    }
+    <div class="col-md-offset-3">
+        <form asp-action="Create">
+            <div class="form-horizontal">
 
-<form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>Movie</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>       
-        <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Name" class="form-control" placeholder="Movie name" />
+                        <span asp-validation-for="Name" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genre" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Id" type="hidden" class="form-control" />
+                        <select asp-for="Genre" class="form-control">
+                            @{
+                                <option value="">Select your option</option>
+                                foreach (Genre thisOne in Model.GenreList)
+                                {
+                                    <option value="@thisOne.Id">@thisOne.Name</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="Genre" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReleaseDate" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ReleaseDate" class="form-control" />
+                        <span asp-validation-for="ReleaseDate" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumberInStock" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="NumberInStock" class="form-control" placeholder="Number in stock" />
+                        <span asp-validation-for="NumberInStock" class="text-danger" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateAdded" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="DateAdded" class="form-control" placeholder="Date Added" />
+                        <span asp-validation-for="DateAdded" class="text-danger" />
+                    </div>
+                </div>
+                <br /><br /><br /><br /><br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-success col-md-offset-1">Back to List</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Genres" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Genres" class="form-control" />
-                <span asp-validation-for="Genres" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Price" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ReleaseDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ReleaseDate" class="form-control" />
-                <span asp-validation-for="ReleaseDate" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="NumberInStock" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="NumberInStock" class="form-control" />
-                <span asp-validation-for="NumberInStock" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="DateAdded" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="DateAdded" class="form-control" />
-                <span asp-validation-for="DateAdded" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <p>
+                Upnoid™
+            </p>
+        </form>
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

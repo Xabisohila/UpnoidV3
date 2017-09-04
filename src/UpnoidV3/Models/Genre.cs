@@ -13,5 +13,10 @@ namespace UpnoidV3.Models
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

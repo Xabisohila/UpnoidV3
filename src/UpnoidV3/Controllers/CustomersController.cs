@@ -8,24 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using UpnoidV3.Models;
 using UpnoidV3.Services;
 using Microsoft.AspNetCore.Authorization;
+using UpnoidV3.ViewModels;
 
 namespace UpnoidV3.Controllers
 {
-   // [Authorize (Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class CustomersController : Controller
     {
         private readonly UpnoidContext _context;
- 
+
         public CustomersController(UpnoidContext context)
         {
-            _context = context;    
+            _context = context;
         }
-
-        // GET: Customers
-        //public async Task<IActionResult> Index()
-        //{
-            //return View(await _context.Customers.ToListAsync());
-        //}
+        //GET: Customers
          public async Task<IActionResult> Index(
              string sortOrder, 
              string currentFilter,
@@ -64,7 +60,8 @@ namespace UpnoidV3.Controllers
             int pageSize = 5;
             return View(await PaginatedList<Customer>.CreateAsync(customers.AsNoTracking(), page ?? 1, pageSize));
         }
-
+        
+        
     // GET: Customers/Details/5
     public async Task<IActionResult> Details(int? id)
         {
@@ -98,6 +95,7 @@ namespace UpnoidV3.Controllers
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
+                TempData["message"] = $"{customer.FirstName + "" + customer.LastName} has been added";
                 return RedirectToAction("Index");
             }
             return View(customer);

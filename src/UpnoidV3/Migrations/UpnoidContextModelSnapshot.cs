@@ -214,13 +214,12 @@ namespace UpnoidV3.Migrations
 
             modelBuilder.Entity("UpnoidV3.Models.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MovieID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateAdded");
 
-                    b.Property<string>("Genres")
-                        .IsRequired();
+                    b.Property<string>("Genres");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -232,7 +231,7 @@ namespace UpnoidV3.Migrations
 
                     b.Property<DateTime>("ReleaseDate");
 
-                    b.HasKey("Id");
+                    b.HasKey("MovieID");
 
                     b.ToTable("Movies");
                 });
@@ -249,14 +248,14 @@ namespace UpnoidV3.Migrations
 
                     b.Property<DateTime?>("DateReturned");
 
-                    b.Property<int?>("MovieId")
+                    b.Property<int?>("MovieID")
                         .IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerID");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("MovieID");
 
                     b.ToTable("Rentals");
                 });
@@ -268,13 +267,13 @@ namespace UpnoidV3.Migrations
 
                     b.Property<int>("DurationInMinutes");
 
-                    b.Property<int?>("MovieId");
+                    b.Property<int?>("MovieID");
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("MovieID");
 
                     b.ToTable("Trailer");
                 });
@@ -325,7 +324,7 @@ namespace UpnoidV3.Migrations
 
                     b.HasOne("UpnoidV3.Models.Movie", "Movie")
                         .WithMany()
-                        .HasForeignKey("MovieId")
+                        .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -333,7 +332,7 @@ namespace UpnoidV3.Migrations
                 {
                     b.HasOne("UpnoidV3.Models.Movie", "Movie")
                         .WithMany()
-                        .HasForeignKey("MovieId");
+                        .HasForeignKey("MovieID");
                 });
         }
     }

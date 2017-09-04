@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace UpnoidV3.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class FirstMigtrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,10 +96,10 @@ namespace UpnoidV3.Migrations
                 name: "Movies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    MovieID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateAdded = table.Column<DateTime>(nullable: false),
-                    Genres = table.Column<string>(nullable: false),
+                    Genres = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
                     NumberInStock = table.Column<byte>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
@@ -107,7 +107,7 @@ namespace UpnoidV3.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.PrimaryKey("PK_Movies", x => x.MovieID);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,7 +205,7 @@ namespace UpnoidV3.Migrations
                     CustomerID = table.Column<int>(nullable: false),
                     DateRented = table.Column<DateTime>(nullable: false),
                     DateReturned = table.Column<DateTime>(nullable: true),
-                    MovieId = table.Column<int>(nullable: false)
+                    MovieID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -217,10 +217,10 @@ namespace UpnoidV3.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Rentals_Movies_MovieId",
-                        column: x => x.MovieId,
+                        name: "FK_Rentals_Movies_MovieID",
+                        column: x => x.MovieID,
                         principalTable: "Movies",
-                        principalColumn: "Id",
+                        principalColumn: "MovieID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -231,17 +231,17 @@ namespace UpnoidV3.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DurationInMinutes = table.Column<int>(nullable: false),
-                    MovieId = table.Column<int>(nullable: true),
+                    MovieID = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trailer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trailer_Movies_MovieId",
-                        column: x => x.MovieId,
+                        name: "FK_Trailer_Movies_MovieID",
+                        column: x => x.MovieID,
                         principalTable: "Movies",
-                        principalColumn: "Id",
+                        principalColumn: "MovieID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -292,14 +292,14 @@ namespace UpnoidV3.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rentals_MovieId",
+                name: "IX_Rentals_MovieID",
                 table: "Rentals",
-                column: "MovieId");
+                column: "MovieID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trailer_MovieId",
+                name: "IX_Trailer_MovieID",
                 table: "Trailer",
-                column: "MovieId");
+                column: "MovieID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

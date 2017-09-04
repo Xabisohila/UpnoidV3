@@ -1,4 +1,25 @@
-﻿body {
+﻿#mainLogo {
+		padding-left: 5%;
+}
+
+#brand {
+	display: inline-flex;
+}
+
+#logo {
+	padding-left: 6%;
+	
+}
+
+#icon {
+	padding-top: 11%;
+	padding-left: 5%;
+}
+.form-group {
+	margin:-5%;
+	
+}
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -36,11 +57,12 @@ textarea {
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
+
+/* .carousel-inner .item img[src$=".svg"] 
 {
     width: 100%;
 }
-
+*/
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
   /* Hide captions */

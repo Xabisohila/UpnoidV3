@@ -1,89 +1,116 @@
 @model PaginatedList<UpnoidV3.Models.Movie>
-
 @{
     ViewData["Title"] = "Index";
 }
-<h2>Movies</h2>
-<br />
-@if (User.IsInRole("Admin")) { 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New Movie</a>
-</p>
-    <br />
-}
-<table class="table table-bordered table-hover">
-    <thead>
-    <thead>
-        <tr>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"
-                   asp-route-currentFilter="@ViewData["CurrentFilter"]">Movie Name</a>
-            </th>
-            
-            <th>
-                Genre
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                Release Date
-            </th>
-            <th>
-                Number in Stock
-            </th>
-            <th>
-                Date Added
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberInStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateAdded)
-            </td>
-            @if (User.IsInRole("Admin")) { 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> 
-               @* <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a> *@
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
-            </td>
-            }
-        </tr>
-}
-    </tbody>
-</table>
-@{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-danger @prevDisabled btn">
-    Previous
-</a>
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-danger @nextDisabled btn">
-    Next
-</a>
+<div class="panel panel-success">
+    <div class="jumbotron panel-heading text-center">
+        <b> LIST OF MOVIES</b> <br />
+        <h4>We have: @Model.Count() movie(s)</h4> 
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create" class="btn btn-success col-md-3">Add New Movie</a><br /><br />
+        </p>
+    }
+    @if (Model.Count() == 0)
+    {
+        <h2>No movies available. Click on the create movie to add a new movie.</h2>
+
+    }
+        <table class="table table-bordered table-hover">
+            <thead>
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]">Movie Name</a>
+                    </th>
+
+
+                    <th>
+                        Genre
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Release Date
+                    </th>
+                    <th>
+                        Number in Stock
+                    </th>
+                    <th>
+                        Date Added
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genres)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReleaseDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberInStock)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateAdded)
+                        </td>
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="" asp-controller="" class="">Watch Trailer</a>
+                            </td>
+
+                        }
+                        else{
+                            <td>
+                                <a asp-action="#" asp-controller="#" class="">Add Trailer</a>
+                            </td>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.MovieID" class="btn btn-warning">Edit</a>
+                             @*   <a asp-action="AddToCart" asp-controller="Cart" asp-for="Movies" class="btn btn-primary">Add to Cart</a>*@
+                                <a asp-action="Delete" asp-route-id="@item.MovieID" class="btn btn-danger">Delete</a>
+
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>    
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-danger @prevDisabled btn">
+        Previous
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-danger @nextDisabled btn">
+        Next
+    </a>
+
+    

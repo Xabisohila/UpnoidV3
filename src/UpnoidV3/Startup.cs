@@ -15,6 +15,8 @@ using UpnoidV3.Services;
 using Microsoft.AspNetCore.Mvc;
 using UpnoidV3.Configuration;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace UpnoidV3
 {
@@ -62,12 +64,17 @@ namespace UpnoidV3
             services.AddMvc();
 
             // Add application services.
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMemoryCache();
+            services.AddSession();
+
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory
+            , UpnoidContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -79,6 +86,7 @@ namespace UpnoidV3
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
+                app.UseSession();
             }
             else
             {
@@ -109,9 +117,15 @@ namespace UpnoidV3
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "pagination",
+                    template: "Customers/Page{page}",
+                    defaults: new { Controller = "Customers", action = "Index" });
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+          //  DbInitializer.Initialize(context); 
         }
     }
 }
